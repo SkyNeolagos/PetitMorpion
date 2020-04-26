@@ -14,8 +14,22 @@
          </image>
       </ImageView>
       <Slider layoutX="14.0" layoutY="562.0" prefHeight="24.0" prefWidth="145.0" />
-      <Button layoutX="374.0" layoutY="288.0" mnemonicParsing="false" onAction="#goGameScene" text="Button" />
-      <Button fx:id="buttonParametre" layoutX="709.0" layoutY="35.0" mnemonicParsing="false" onAction="#goParameterScene" text="Parametre" />
+      <Button layoutX="317.0" layoutY="217.0" mnemonicParsing="false" onAction="#goGameScene" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="200.0" onDragDetected="#goGameScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../imagesResources/iconSpaceNavet.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="buttonParametre" layoutX="670.0" layoutY="14.0" mnemonicParsing="false" onAction="#goParameterScene" prefHeight="102.0" prefWidth="116.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="66.0" fitWidth="81.0" onDragDetected="#goParameterScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../imagesResources/iconGears.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <Button fx:id="quitButton" layoutX="374.0" layoutY="512.0" mnemonicParsing="false" onAction="#closeAppEvent" text="Quitter" />
    </children>
 </AnchorPane>
