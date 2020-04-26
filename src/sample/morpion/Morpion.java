@@ -35,7 +35,7 @@ public class Morpion extends GridPane {//TODO améliorer complexité
 
         public Cell(Rule rule) {
             this.rule=rule;
-            setStyle("-fx-border-color: #2ad1ff");
+            setStyle("-fx-border-color: #303336");
             this.setPrefSize(300,300);
             this.setOnMouseClicked(e->handleClick());
         }
