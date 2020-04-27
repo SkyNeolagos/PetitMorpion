@@ -1,5 +1,7 @@
 package sample.morpion;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -9,9 +11,11 @@ import javafx.scene.shape.Line;
 public class Morpion extends GridPane {//TODO améliorer complexité
     private int currentPlayer;
     private Rule rule;
+    private ImageView iconPlayer;
 
-    public Morpion(GridPane gridPane){
+    public Morpion(GridPane gridPane, ImageView iconPlayer){
         this.currentPlayer=1;
+        this.iconPlayer=iconPlayer;
         Cell[][] board = new Cell[3][3];
         this.rule=new Rule(board);
         for (int i = 0; i < 3; i++) {
@@ -45,25 +49,25 @@ public class Morpion extends GridPane {//TODO améliorer complexité
         public void setPlayer(int player) {
             //TODO Changer les icones
             this.player = player;
-            if(this.player==1){
-                Line line1=new Line(10,10,this.getHeight()-10,10);
-                line1.endXProperty().bind(this.widthProperty().subtract(10));
-                line1.endYProperty().bind(this.heightProperty().subtract(10));
+                if(this.player==1){
+                    Line line1=new Line(10,10,this.getHeight()-10,10);
+                    line1.endXProperty().bind(this.widthProperty().subtract(10));
+                    line1.endYProperty().bind(this.heightProperty().subtract(10));
 
-                Line line2=new Line(10,10,this.getWidth()-10,this.getHeight()-10);
-                line2.endXProperty().bind(this.widthProperty().subtract(10));
-                line2.startYProperty().bind(this.heightProperty().subtract(10));
+                    Line line2=new Line(10,10,this.getWidth()-10,this.getHeight()-10);
+                    line2.endXProperty().bind(this.widthProperty().subtract(10));
+                    line2.startYProperty().bind(this.heightProperty().subtract(10));
 
-                getChildren().addAll(line1,line2);
-            }
-            else if(this.player==2){
-                Ellipse ellipse=new Ellipse(this.getWidth()/2,this.getHeight()/2,this.getWidth()/2-10,this.getHeight()/2-10);
-                ellipse.centerXProperty().bind(this.widthProperty().divide(2));
-                ellipse.centerYProperty().bind(this.heightProperty().divide(2));
-                ellipse.radiusXProperty().bind(this.widthProperty().divide(2).subtract(10));
-                ellipse.radiusYProperty().bind(this.heightProperty().divide(2).subtract(10));
-                ellipse.setStroke(Color.BEIGE);
-                ellipse.setFill(Color.ROSYBROWN);
+                    getChildren().addAll(line1,line2);
+                }
+                else if(this.player==2){
+                    Ellipse ellipse=new Ellipse(this.getWidth()/2,this.getHeight()/2,this.getWidth()/2-10,this.getHeight()/2-10);
+                    ellipse.centerXProperty().bind(this.widthProperty().divide(2));
+                    ellipse.centerYProperty().bind(this.heightProperty().divide(2));
+                    ellipse.radiusXProperty().bind(this.widthProperty().divide(2).subtract(10));
+                    ellipse.radiusYProperty().bind(this.heightProperty().divide(2).subtract(10));
+                    ellipse.setStroke(Color.BEIGE);
+                    ellipse.setFill(Color.ROSYBROWN);
                 getChildren().add(ellipse);
             }
         }
@@ -73,6 +77,7 @@ public class Morpion extends GridPane {//TODO améliorer complexité
                 setPlayer(currentPlayer);
                 if(rule.victory(currentPlayer)){
                     System.out.println("Victoire de : "+currentPlayer);
+                    //TODO Faire nouvelle fenetre/popup victoire
                     currentPlayer=0;
                 }
                 else if(rule.equalityBetweenBothPlayer()){

@@ -18,7 +18,7 @@
       </ImageView>
       <Pane layoutX="150.0" layoutY="75.0" opacity="0.6" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: white;" />
       <BorderPane fx:id="borderPane" layoutX="150.0" layoutY="75.0" prefHeight="450.0" prefWidth="500.0" />
-      <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="5.0" layoutY="14.0" maxHeight="40.0" maxWidth="1445.0" minHeight="24.0" minWidth="145.0" prefHeight="40.0" prefWidth="145.0" text="Au Tour de " textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="5.0" layoutY="14.0" maxHeight="40.0" maxWidth="1445.0" minHeight="24.0" minWidth="145.0" prefHeight="40.0" prefWidth="145.0" text="Au Tour de :" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Ink Free" size="20.0" />
          </font>
@@ -26,5 +26,6 @@
       <Button layoutX="61.0" layoutY="513.0" mnemonicParsing="false" text="Button" />
       <Button layoutX="685.0" layoutY="517.0" mnemonicParsing="false" text="Button" />
       <Button layoutX="374.0" layoutY="549.0" mnemonicParsing="false" text="Button" />
+      <ImageView fx:id="iconPlayer" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
