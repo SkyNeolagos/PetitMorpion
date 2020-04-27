@@ -5,31 +5,20 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.morpion.SceneController">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../../imagesResources/plaine.jpg" />
          </image>
       </ImageView>
-      <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" layoutX="150.0" layoutY="75.0" maxHeight="450.0" maxWidth="500.0" minHeight="250.0" minWidth="250.0" opacity="0.6" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: white;">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
-      <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="5.0" layoutY="14.0" maxHeight="40.0" maxWidth="1445.0" minHeight="24.0" minWidth="145.0" prefHeight="40.0" prefWidth="145.0" text="Au Tour de " textAlignment="CENTER" textFill="WHITE">
+      <Pane layoutX="150.0" layoutY="75.0" opacity="0.6" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: white;" />
+      <BorderPane fx:id="borderPane" layoutX="150.0" layoutY="75.0" prefHeight="450.0" prefWidth="500.0" />
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="5.0" layoutY="14.0" maxHeight="40.0" maxWidth="1445.0" minHeight="24.0" minWidth="145.0" prefHeight="40.0" prefWidth="145.0" text="Au Tour de :" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Ink Free" size="20.0" />
          </font>
@@ -37,5 +26,6 @@
       <Button layoutX="61.0" layoutY="513.0" mnemonicParsing="false" text="Button" />
       <Button layoutX="685.0" layoutY="517.0" mnemonicParsing="false" text="Button" />
       <Button layoutX="374.0" layoutY="549.0" mnemonicParsing="false" text="Button" />
+      <ImageView fx:id="iconPlayer" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
