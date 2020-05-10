@@ -77,7 +77,7 @@ public class Morpion extends GridPane {//TODO améliorer complexité
                 setPlayer(currentPlayer);
                 if(rule.victory(currentPlayer)){
                     System.out.println("Victoire de : "+currentPlayer);
-                    //TODO Faire nouvelle fenetre/popup victoire
+                    AlertBox.display("Félicitation ! Vous avez gagné la partie !"); //TODO Améliorer l'affichage de l'alertbox
                     currentPlayer=0;
                 }
                 else if(rule.equalityBetweenBothPlayer()){
