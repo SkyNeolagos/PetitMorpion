@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
          <image>
-            <Image url="@../../imagesResources/plaine.jpg" />
+            <Image url="@../../imagesResources/background/plaine.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="150.0" layoutY="75.0" opacity="0.6" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: white;" />
