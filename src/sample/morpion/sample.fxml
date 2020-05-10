@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="14.0" layoutY="29.0" nodeOrientation="INHERIT" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../imagesResources/sunEarth.jpg" />
+            <Image url="@../../imagesResources/background/sunEarth.jpg" />
          </image>
       </ImageView>
       <Slider layoutX="14.0" layoutY="562.0" prefHeight="24.0" prefWidth="145.0" />
