@@ -48,6 +48,7 @@ public class IA extends Player {
         return copyBoard;
     }
     private Move bestMove(Morpion.Cell[][] board,Player player){
+        //TODO Optimisation du premier coup avec une fonction de coupe sur les branches inutiles
         Player adversaire=getAdversaire(player);
         List<Move> collectionMove=new ArrayList<>();
         int score;
