@@ -1,21 +1,30 @@
 package sample.morpion;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Line;
+import player.IA;
+import player.Player;
 
 public class Morpion extends GridPane {//TODO améliorer complexité
-    private int currentPlayer;
+    private Player currentPlayer;
     private Rule rule;
     private ImageView iconPlayer;
 
+    private Player tabPlayer[];
+
     public Morpion(GridPane gridPane, ImageView iconPlayer){
-        this.currentPlayer=1;
-        this.iconPlayer=iconPlayer;
+        tabPlayer=new Player[3];
+        Player arbitre=new Player(0);
+        Player j1=new Player("../imagesResources/iconSpaceNavet.png",1);
+        IA ia=new IA("../imagesResources/iconGears.png",2);
+        tabPlayer[0]=arbitre;
+        tabPlayer[1]=j1;
+        tabPlayer[2]=ia;
+
+
+        this.currentPlayer=tabPlayer[1];
+        this.iconPlayer=tabPlayer[1].getImageView();
         Cell[][] board = new Cell[3][3];
         this.rule=new Rule(board);
         for (int i = 0; i < 3; i++) {
@@ -30,11 +39,11 @@ public class Morpion extends GridPane {//TODO améliorer complexité
         return rule;
     }
 
-    public int getPlayer() {
+    public Player getPlayer() {
         return currentPlayer;
     }
     public class Cell extends Pane {
-        private int player=0;
+        private Player player=new Player(0);
         private Rule rule;
 
         public Cell(Rule rule) {
@@ -43,55 +52,41 @@ public class Morpion extends GridPane {//TODO améliorer complexité
             this.setPrefSize(300,300);
             this.setOnMouseClicked(e->handleClick());
         }
-        int getPlayer(){
+
+        public Player getPlayer() {
             return player;
         }
-        public void setPlayer(int player) {
-            //TODO Changer les icones
+
+        public void setPlayer(Player player) {
             this.player = player;
-                if(this.player==1){
-                    Line line1=new Line(10,10,this.getHeight()-10,10);
-                    line1.endXProperty().bind(this.widthProperty().subtract(10));
-                    line1.endYProperty().bind(this.heightProperty().subtract(10));
-
-                    Line line2=new Line(10,10,this.getWidth()-10,this.getHeight()-10);
-                    line2.endXProperty().bind(this.widthProperty().subtract(10));
-                    line2.startYProperty().bind(this.heightProperty().subtract(10));
-
-                    getChildren().addAll(line1,line2);
-                }
-                else if(this.player==2){
-                    Ellipse ellipse=new Ellipse(this.getWidth()/2,this.getHeight()/2,this.getWidth()/2-10,this.getHeight()/2-10);
-                    ellipse.centerXProperty().bind(this.widthProperty().divide(2));
-                    ellipse.centerYProperty().bind(this.heightProperty().divide(2));
-                    ellipse.radiusXProperty().bind(this.widthProperty().divide(2).subtract(10));
-                    ellipse.radiusYProperty().bind(this.heightProperty().divide(2).subtract(10));
-                    ellipse.setStroke(Color.BEIGE);
-                    ellipse.setFill(Color.ROSYBROWN);
-                getChildren().add(ellipse);
-            }
+            ImageView imageView=this.player.getImageView();
+            imageView.setX(10);
+            imageView.setY(10);
+            imageView.setFitWidth(this.getWidth()-20);
+            imageView.setFitHeight(this.getHeight()-20);
+            getChildren().add(imageView);
         }
 
         private void handleClick(){
-            if (player==0 && currentPlayer!=0){
+            if (player.getId()==0 && currentPlayer.getId()!=0){
                 setPlayer(currentPlayer);
-                if(rule.victory(currentPlayer)){
+                if(rule.victory(currentPlayer.getId())){
                     System.out.println("Victoire de : "+currentPlayer);
                     AlertBox.display("Félicitation ! Vous avez gagné la partie !"); //TODO Améliorer l'affichage de l'alertbox
-                    currentPlayer=0;
+                    currentPlayer=tabPlayer[0];
                 }
                 else if(rule.equalityBetweenBothPlayer()){
                     System.out.println("Egalité");
-                    currentPlayer=0;
+                    currentPlayer=tabPlayer[0];
                 }
                 else{
-                    switch (currentPlayer){
+                    switch (currentPlayer.getId()){
                         case 1:
-                            currentPlayer=2;
+                            currentPlayer=tabPlayer[2];
                             System.out.println("Changement Joueur");
                             break;
                         case 2:
-                            currentPlayer=1;
+                            currentPlayer=tabPlayer[1];
                             System.out.println("Changement Joueur");
                             break;
                     }
