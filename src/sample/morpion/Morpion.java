@@ -24,7 +24,7 @@ public class Morpion extends GridPane {//TODO améliorer complexité
             System.out.println(currentPlayer);
         }
     }
-    public Morpion(GridPane gridPane, ImageView iconPlayer){
+    public Morpion(GridPane gridPane, ImageView iconPlayer) {
         board = new Cell[3][3];
         this.rule=new Rule(board);
         for (int i = 0; i < 3; i++) {
@@ -44,13 +44,25 @@ public class Morpion extends GridPane {//TODO améliorer complexité
         this.currentPlayer=tabPlayer[1];
         this.iconPlayer=iconPlayer;
         this.iconPlayer.setImage(tabPlayer[1].getImage());
+
         IA ia=new IA("../imagesResources/iconGears.png",2,this);
         tabPlayer[2]=ia;
     }
+
+
+    private void setupPlayer(){
+        //TODO Recuperer info sur la partie
+        //Humain vs IA ou Humain vs Humain
+
+    }
+
     public void game(){
-        if(currentPlayer==tabPlayer[2]){
+        if(currentPlayer==tabPlayer[1] && tabPlayer[1] instanceof IA){
+            IA.Move move=tabPlayer[1].play();
+            board[move.getI()][move.getJ()].handleClick();
+        }
+        if(currentPlayer==tabPlayer[2] && tabPlayer[2] instanceof IA){
             IA.Move move=tabPlayer[2].play();
-            System.out.println(move.getI()+","+move.getJ());
             board[move.getI()][move.getJ()].handleClick();
         }
     }
@@ -116,14 +128,14 @@ public class Morpion extends GridPane {//TODO améliorer complexité
                         case 1:
                             morpion.currentPlayer=morpion.tabPlayer[2];
                             morpion.iconPlayer.setImage(morpion.tabPlayer[2].getImage());
-                            if(option){
-                                morpion.game();
-                            }
                             break;
                         case 2:
                             morpion.currentPlayer=morpion.tabPlayer[1];
                             morpion.iconPlayer.setImage(morpion.tabPlayer[1].getImage());
                             break;
+                    }
+                    if(option){
+                        morpion.game();
                     }
                 }
             }
