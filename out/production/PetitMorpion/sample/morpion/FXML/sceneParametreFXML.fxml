@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.morpion.SceneController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
          <image>
-            <Image url="@../../imagesResources/background/sas.jpg" />
+            <Image url="@../../../imagesResources/background/sas.jpg" />
          </image>
       </ImageView>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="200.0">
@@ -64,7 +64,7 @@
          <graphic>
             <ImageView fitHeight="75.0" fitWidth="115.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../imagesResources/iconBack.png" />
+                  <Image url="@../../../imagesResources/iconBack.png" />
                </image>
             </ImageView>
          </graphic></Button>
