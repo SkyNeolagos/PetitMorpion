@@ -4,31 +4,36 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Player {
-    private String icon;
+    private String iconChemin;
     private int id;
+    private Image image;
+    private ImageView imageView;
 
     public Player(int id) {
         this.id = id;
     }
 
-    public Player(String icon, int id) {
-        this.icon = icon;
+    public Player(String iconChemin, int id) {
+        this.iconChemin = iconChemin;
         this.id = id;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getIconChemin() {
+        return iconChemin;
+    }
+    public Image getImage(){
+        image = new Image(Player.class.getResourceAsStream(this.iconChemin));
+        return image;
     }
     public ImageView getImageView(){
-        final ImageView imv = new ImageView();
-        System.out.println(this.icon);
-        final Image image2 = new Image(Player.class.getResourceAsStream(this.icon));
-        imv.setImage(image2);
-        return imv;
+        image = new Image(Player.class.getResourceAsStream(this.iconChemin));
+        imageView= new ImageView();
+        imageView.setImage(image);
+        return imageView;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setIconChemin(String iconChemin) {
+        this.iconChemin = iconChemin;
     }
 
     public int getId() {
@@ -37,5 +42,9 @@ public class Player {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public IA.Move play() {
+        return null;
     }
 }

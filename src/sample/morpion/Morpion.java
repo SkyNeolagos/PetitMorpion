@@ -6,51 +6,83 @@ import javafx.scene.layout.Pane;
 import player.IA;
 import player.Player;
 
+
 public class Morpion extends GridPane {//TODO améliorer complexité
     private Player currentPlayer;
     private Rule rule;
     private ImageView iconPlayer;
+    private Cell[][] board;
 
     private Player tabPlayer[];
 
+    public Morpion(Morpion morpion,Cell[][] board){
+        this.currentPlayer=morpion.currentPlayer;
+        this.rule=new Rule();
+        this.board=board;
+        if(board==null){
+            System.out.println("NULL in Morpion");
+            System.out.println(currentPlayer);
+        }
+    }
     public Morpion(GridPane gridPane, ImageView iconPlayer){
-        tabPlayer=new Player[3];
-        Player arbitre=new Player(0);
-        Player j1=new Player("../imagesResources/iconSpaceNavet.png",1);
-        IA ia=new IA("../imagesResources/iconGears.png",2);
-        tabPlayer[0]=arbitre;
-        tabPlayer[1]=j1;
-        tabPlayer[2]=ia;
-
-
-        this.currentPlayer=tabPlayer[1];
-        this.iconPlayer=tabPlayer[1].getImageView();
-        Cell[][] board = new Cell[3][3];
+        board = new Cell[3][3];
         this.rule=new Rule(board);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                board[i][j]=new Cell(rule);
+                board[i][j]=new Cell(rule,this,true);
                 gridPane.add(board[i][j],j,i);
             }
         }
+
+        tabPlayer=new Player[3];
+        Player arbitre=new Player(0);
+        Player j1=new Player("../imagesResources/iconSpaceNavet.png",1);
+
+        tabPlayer[0]=arbitre;
+        tabPlayer[1]=j1;
+
+        this.currentPlayer=tabPlayer[1];
+        this.iconPlayer=iconPlayer;
+        this.iconPlayer.setImage(tabPlayer[1].getImage());
+        IA ia=new IA("../imagesResources/iconGears.png",2,this);
+        tabPlayer[2]=ia;
+    }
+    public void game(){
+        if(currentPlayer==tabPlayer[2]){
+            IA.Move move=tabPlayer[2].play();
+            System.out.println(move.getI()+","+move.getJ());
+            board[move.getI()][move.getJ()].handleClick();
+        }
     }
 
+    public Cell[][] getBoard() { return board; }
     public Rule getRule() {
         return rule;
     }
-
     public Player getPlayer() {
         return currentPlayer;
     }
-    public class Cell extends Pane {
+
+
+    public static class Cell extends Pane {
         private Player player=new Player(0);
         private Rule rule;
+        private Morpion morpion;
+        private boolean option;
 
-        public Cell(Rule rule) {
+        public Cell(Cell cell){
+            this.player=cell.player;
+            this.option=false;
+            this.rule=cell.rule;
+            this.morpion=cell.morpion;
+        }
+        public Cell(Rule rule,Morpion morpion,boolean option) {
             this.rule=rule;
             setStyle("-fx-border-color: #303336");
             this.setPrefSize(300,300);
             this.setOnMouseClicked(e->handleClick());
+            this.morpion=morpion;
+            this.option=option;
         }
 
         public Player getPlayer() {
@@ -68,26 +100,29 @@ public class Morpion extends GridPane {//TODO améliorer complexité
         }
 
         private void handleClick(){
-            if (player.getId()==0 && currentPlayer.getId()!=0){
-                setPlayer(currentPlayer);
-                if(rule.victory(currentPlayer.getId())){
-                    System.out.println("Victoire de : "+currentPlayer);
+            if (player.getId()==0 && morpion.currentPlayer.getId()!=0){
+                setPlayer(morpion.currentPlayer);
+                if(rule.victory(morpion.currentPlayer.getId())==morpion.currentPlayer.getId()){
+                    System.out.println("Victoire de : "+morpion.currentPlayer);
                     AlertBox.display("Félicitation ! Vous avez gagné la partie !"); //TODO Améliorer l'affichage de l'alertbox
-                    currentPlayer=tabPlayer[0];
+                    morpion.currentPlayer=morpion.tabPlayer[0];
                 }
                 else if(rule.equalityBetweenBothPlayer()){
                     System.out.println("Egalité");
-                    currentPlayer=tabPlayer[0];
+                    morpion.currentPlayer=morpion.tabPlayer[0];
                 }
                 else{
-                    switch (currentPlayer.getId()){
+                    switch (morpion.currentPlayer.getId()){
                         case 1:
-                            currentPlayer=tabPlayer[2];
-                            System.out.println("Changement Joueur");
+                            morpion.currentPlayer=morpion.tabPlayer[2];
+                            morpion.iconPlayer.setImage(morpion.tabPlayer[2].getImage());
+                            if(option){
+                                morpion.game();
+                            }
                             break;
                         case 2:
-                            currentPlayer=tabPlayer[1];
-                            System.out.println("Changement Joueur");
+                            morpion.currentPlayer=morpion.tabPlayer[1];
+                            morpion.iconPlayer.setImage(morpion.tabPlayer[1].getImage());
                             break;
                     }
                 }
