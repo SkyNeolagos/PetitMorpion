@@ -24,7 +24,7 @@ public class Main extends Application {
 
     private void showMenu() throws IOException {
         FXMLLoader fxmlLoader=new FXMLLoader();
-        fxmlLoader.setLocation(Main.class.getResource("morpion/sample.fxml"));
+        fxmlLoader.setLocation(Main.class.getResource("controller/sample.fxml"));
         AnchorPane mainLayout = fxmlLoader.load();
         Scene scene=new Scene(mainLayout,800,600);
         primaryStage.setScene(scene);

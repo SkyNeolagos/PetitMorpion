@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
          <image>
-            <Image url="@../../imagesResources/background/plaine.jpg" />
+            <Image url="@../../../imagesResources/background/plaine.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="150.0" layoutY="75.0" opacity="0.6" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: white;" />
@@ -23,7 +23,7 @@
             <Font name="Ink Free" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="61.0" layoutY="513.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="61.0" layoutY="513.0" mnemonicParsing="false" onAction="#goMenuScene" text="Retou Menu" /> <!--Faire attention a bien specifié le controller-->
       <Button layoutX="685.0" layoutY="517.0" mnemonicParsing="false" text="Button" />
       <Button layoutX="374.0" layoutY="549.0" mnemonicParsing="false" text="Button" />
       <ImageView fx:id="iconPlayer" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />

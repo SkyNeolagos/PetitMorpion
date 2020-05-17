@@ -1,4 +1,4 @@
-package sample.morpion;
+package sample.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import sample.morpion.Morpion;
 
 
 import java.io.IOException;
@@ -31,25 +32,36 @@ public class SceneController implements Initializable {
     }
 
     public void goParameterScene(ActionEvent event) throws IOException {
-        Parent parameterParent=FXMLLoader.load(getClass().getResource("sceneParametreFXML.fxml"));
-        Scene parameterScene=new Scene(parameterParent,800,600);
         Stage window =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("../morpion/FXML/sceneParametreFXML.fxml"));
+        if(loader.getController()==null){
+            loader.setController(this);
+        }
+        Parent root = (Parent) loader.load();
+
+        //Parent parameterParent=FXMLLoader.load(getClass().getResource("FXML/sceneParametreFXML.fxml"));
+        Scene parameterScene=new Scene(root,800,600);
         window.setScene(parameterScene);
         window.setResizable(false);
         window.show();
     }
     public void goMenuScene(ActionEvent event) throws IOException {
-        Parent menuParent=FXMLLoader.load(getClass().getResource("sample.fxml"));
-        Scene parameterScene=new Scene(menuParent,800,600);
         Stage window =(Stage) ((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = (Parent) loader.load();
+
+        //Parent menuParent=FXMLLoader.load(getClass().getResource("FXML/sample.fxml"));
+        Scene parameterScene=new Scene(root,800,600);
         window.setScene(parameterScene);
         window.setResizable(false);
         window.show();
     }
     public void goGameScene(ActionEvent event) throws IOException {
         Stage window =(Stage) ((Node)event.getSource()).getScene().getWindow();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("gameView.fxml"));
-        loader.setController(this);
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("../morpion/FXML/gameView.fxml"));
+        if(loader.getController()==null){
+            loader.setController(this);
+        }
         Parent root = (Parent) loader.load();
 
         GridPane gPane=new GridPane();
