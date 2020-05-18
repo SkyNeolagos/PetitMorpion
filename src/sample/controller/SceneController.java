@@ -97,7 +97,7 @@ public class SceneController implements Initializable {
 
         Parent root = (Parent) loader.load();
         imageWin.setImage(image);
-        Scene scene = new Scene(root,300,200);
+        Scene scene = new Scene(root,800,600);
         window.setScene(scene);
         window.setResizable(false);
         window.show();
