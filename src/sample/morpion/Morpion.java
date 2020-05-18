@@ -139,6 +139,8 @@ public class Morpion extends GridPane {//TODO améliorer complexité
                     morpion.currentPlayer=morpion.tabPlayer[0];
                 }
                 else if(rule.equalityBetweenBothPlayer()){
+                    Image imageDraw=getDrawImage();
+                    morpion.sceneController.goEndScene(morpion.window,imageDraw);
                     morpion.currentPlayer=morpion.tabPlayer[0];
                 }
                 else{
@@ -158,7 +160,9 @@ public class Morpion extends GridPane {//TODO améliorer complexité
                 }
             }
         }
-
+        private Image getDrawImage(){
+            return new Image(Player.class.getResourceAsStream("../imagesResources/draw.png"));
+        }
         private Image getImageWin(Player player){
             if (player instanceof IA) {
                 return new Image(Player.class.getResourceAsStream("../imagesResources/defaite.png"));
