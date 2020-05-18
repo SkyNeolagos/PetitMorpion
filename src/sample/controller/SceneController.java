@@ -36,7 +36,7 @@ public class SceneController implements Initializable {
         System.exit(0);
     }
 
-    public void goParameterScene(ActionEvent event) throws IOException {
+    public void goSetupScene(ActionEvent event) throws IOException {
         Stage window =(Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader loader=new FXMLLoader(getClass().getResource("../morpion/FXML/sceneParametreFXML.fxml"));
         if(loader.getController()==null){
@@ -61,7 +61,13 @@ public class SceneController implements Initializable {
         window.setResizable(false);
         window.show();
     }
-    public void goGameScene(ActionEvent event) throws IOException {
+    public void goStartGameHuman(ActionEvent event) throws IOException {
+        goGameScene(event,1);
+    }
+    public void goStartGameIA(ActionEvent event) throws IOException {
+        goGameScene(event,2);
+    }
+    public void goGameScene(ActionEvent event,int optionJeux) throws IOException {
         Stage window =(Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader loader=new FXMLLoader(getClass().getResource("../morpion/FXML/gameView.fxml"));
         if(loader.getController()==null){
@@ -70,7 +76,7 @@ public class SceneController implements Initializable {
         Parent root = (Parent) loader.load();
 
         GridPane gPane=new GridPane();
-        Morpion morpion=new Morpion(gPane,iconPlayer);
+        Morpion morpion=new Morpion(gPane,iconPlayer,optionJeux);
         borderPane.setCenter(gPane);
 
 

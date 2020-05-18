@@ -10,6 +10,7 @@ import player.Player;
 public class Morpion extends GridPane {//TODO améliorer complexité
     private Player currentPlayer;
     private Rule rule;
+    private int optionJeux;
     private ImageView iconPlayer;
     private Cell[][] board;
 
@@ -19,12 +20,8 @@ public class Morpion extends GridPane {//TODO améliorer complexité
         this.currentPlayer=morpion.currentPlayer;
         this.rule=new Rule();
         this.board=board;
-        if(board==null){
-            System.out.println("NULL in Morpion");
-            System.out.println(currentPlayer);
-        }
     }
-    public Morpion(GridPane gridPane, ImageView iconPlayer) {
+    public Morpion(GridPane gridPane, ImageView iconPlayer,int optionJeux) {
         board = new Cell[3][3];
         this.rule=new Rule(board);
         for (int i = 0; i < 3; i++) {
@@ -33,27 +30,31 @@ public class Morpion extends GridPane {//TODO améliorer complexité
                 gridPane.add(board[i][j],j,i);
             }
         }
-
-        tabPlayer=new Player[3];
-        Player arbitre=new Player(0);
-        Player j1=new Player("../imagesResources/iconSpaceNavet.png",1);
-
-        tabPlayer[0]=arbitre;
-        tabPlayer[1]=j1;
-
-        this.currentPlayer=tabPlayer[1];
         this.iconPlayer=iconPlayer;
-        this.iconPlayer.setImage(tabPlayer[1].getImage());
-
-        IA ia=new IA("../imagesResources/iconGears.png",2,this);
-        tabPlayer[2]=ia;
+        this.optionJeux=optionJeux;
+        setupPlayer(optionJeux);
     }
 
 
-    private void setupPlayer(){
-        //TODO Recuperer info sur la partie
-        //Humain vs IA ou Humain vs Humain
+    private void setupPlayer(int optionJeux){
+        //Partie commune au deux type de partie
+        tabPlayer=new Player[3];
+        Player arbitre=new Player(0);
+        tabPlayer[0]=arbitre;
+        Player j1=new Player("../imagesResources/profil/iconPeople.png",1);
+        tabPlayer[1]=j1;
+        this.currentPlayer=tabPlayer[1];
+        this.iconPlayer.setImage(tabPlayer[1].getImage());
 
+        if(optionJeux==1) {
+            //Humain vs Humain
+            Player j2 = new Player("../imagesResources/profil/iconAstronaut.png", 2);
+            tabPlayer[2] = j2;
+        }else{
+                //Humain vs IA ou Humain vs Humain
+                IA ia=new IA("../imagesResources/profil/iconAlien.png",2,this);
+                tabPlayer[2]=ia;
+        }
     }
 
     public void game(){
