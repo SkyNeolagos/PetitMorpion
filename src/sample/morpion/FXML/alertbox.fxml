@@ -5,11 +5,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="200.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="90.0" fitWidth="300.0" layoutX="6.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="14.0" layoutY="146.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+      <ImageView fx:id="imageWin" fitHeight="90.0" fitWidth="300.0" layoutX="6.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="14.0" layoutY="146.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#goSetupScene" prefHeight="40.0" prefWidth="40.0">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -18,7 +17,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="246.0" layoutY="146.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+      <Button layoutX="232.0" layoutY="146.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#closeAppEvent" prefHeight="40.0" prefWidth="40.0">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>

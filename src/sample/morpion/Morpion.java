@@ -1,13 +1,23 @@
 package sample.morpion;
 
+import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import player.IA;
 import player.Player;
+import sample.controller.SceneController;
+
+
+import java.io.IOException;
 
 
 public class Morpion extends GridPane {//TODO améliorer complexité
+    private SceneController sceneController;
+    private Stage window;
     private Player currentPlayer;
     private Rule rule;
     private int optionJeux;
@@ -21,7 +31,9 @@ public class Morpion extends GridPane {//TODO améliorer complexité
         this.rule=new Rule();
         this.board=board;
     }
-    public Morpion(GridPane gridPane, ImageView iconPlayer,int optionJeux) {
+    public Morpion(Stage window, SceneController sceneController, GridPane gridPane, ImageView iconPlayer, int optionJeux) {
+        this.sceneController=sceneController;
+        this.window=window;
         board = new Cell[3][3];
         this.rule=new Rule(board);
         for (int i = 0; i < 3; i++) {
@@ -57,7 +69,7 @@ public class Morpion extends GridPane {//TODO améliorer complexité
         }
     }
 
-    public void game(){
+    public void game() throws IOException {
         if(currentPlayer==tabPlayer[1] && tabPlayer[1] instanceof IA){
             IA.Move move=tabPlayer[1].play();
             board[move.getI()][move.getJ()].handleClick();
@@ -93,7 +105,13 @@ public class Morpion extends GridPane {//TODO améliorer complexité
             this.rule=rule;
             setStyle("-fx-border-color: #303336");
             this.setPrefSize(300,300);
-            this.setOnMouseClicked(e->handleClick());
+            this.setOnMouseClicked(e-> {
+                try {
+                    handleClick();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
             this.morpion=morpion;
             this.option=option;
         }
@@ -112,16 +130,15 @@ public class Morpion extends GridPane {//TODO améliorer complexité
             getChildren().add(imageView);
         }
 
-        private void handleClick(){
+        private void handleClick() throws IOException {
             if (player.getId()==0 && morpion.currentPlayer.getId()!=0){
                 setPlayer(morpion.currentPlayer);
                 if(rule.victory(morpion.currentPlayer.getId())==morpion.currentPlayer.getId()){
-                    System.out.println("Victoire de : "+morpion.currentPlayer);
-                    AlertBox.display("Félicitation ! Vous avez gagné la partie !"); //TODO Améliorer l'affichage de l'alertbox
+                    Image imageWin=getImageWin(morpion.currentPlayer);
+                    morpion.sceneController.goEndScene(morpion.window,imageWin);
                     morpion.currentPlayer=morpion.tabPlayer[0];
                 }
                 else if(rule.equalityBetweenBothPlayer()){
-                    System.out.println("Egalité");
                     morpion.currentPlayer=morpion.tabPlayer[0];
                 }
                 else{
@@ -139,6 +156,14 @@ public class Morpion extends GridPane {//TODO améliorer complexité
                         morpion.game();
                     }
                 }
+            }
+        }
+
+        private Image getImageWin(Player player){
+            if (player instanceof IA) {
+                return new Image(Player.class.getResourceAsStream("../imagesResources/defaite.png"));
+            }else{
+                return new Image(Player.class.getResourceAsStream("../imagesResources/victoire.png"));
             }
         }
     }
