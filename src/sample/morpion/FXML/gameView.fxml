@@ -23,9 +23,22 @@
             <Font name="Ink Free" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="61.0" layoutY="513.0" mnemonicParsing="false" onAction="#goMenuScene" text="Retou Menu" /> <!--Faire attention a bien specifié le controller-->
-      <Button layoutX="685.0" layoutY="517.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="374.0" layoutY="549.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="25.0" layoutY="480.0" mnemonicParsing="false" onAction="#goMenuScene" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../imagesResources/iconBack.png" />
+               </image>
+            </ImageView>
+         </graphic></Button> <!--Faire attention a bien specifié le controller-->
+      <Button layoutX="680.0" layoutY="480.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../imagesResources/croix.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <ImageView fx:id="iconPlayer" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
