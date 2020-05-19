@@ -12,7 +12,7 @@
             <Image url="@../../../imagesResources/background/center.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="imageWin" fitHeight="137.0" fitWidth="329.0" layoutX="241.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageWin" fitHeight="137.0" fitWidth="329.0" layoutX="241.0" layoutY="281.0" pickOnBounds="true" />
       <Button layoutX="50.0" layoutY="460.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#goSetupScene" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
