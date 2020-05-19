@@ -26,11 +26,13 @@ public class Morpion extends GridPane {//TODO améliorer complexité
 
     private Player tabPlayer[];
 
+    //Fonction de contruction en fonction d'une Insatnce d'un Morpion pre-existant
     public Morpion(Morpion morpion,Cell[][] board){
         this.currentPlayer=morpion.currentPlayer;
         this.rule=new Rule();
         this.board=board;
     }
+    //Fonction de contruction
     public Morpion(Stage window, SceneController sceneController, GridPane gridPane, ImageView iconPlayer, int optionJeux) {
         this.sceneController=sceneController;
         this.window=window;
@@ -47,28 +49,34 @@ public class Morpion extends GridPane {//TODO améliorer complexité
         setupPlayer(optionJeux);
     }
 
-
+    //Fonction remplissant le tableau de joueur en fonction du type de jeu choisie
     private void setupPlayer(int optionJeux){
-        //Partie commune au deux type de partie
         tabPlayer=new Player[3];
+        //Ajout d'un arbitre
         Player arbitre=new Player(0);
         tabPlayer[0]=arbitre;
+
+        //Ajout d'un joueur Humain
         Player j1=new Player("../imagesResources/profil/iconPeople.png",1);
         tabPlayer[1]=j1;
         this.currentPlayer=tabPlayer[1];
         this.iconPlayer.setImage(tabPlayer[1].getImage());
 
+        //Humain vs Humain
         if(optionJeux==1) {
-            //Humain vs Humain
+            //Ajout d'un deuxieme Humain
             Player j2 = new Player("../imagesResources/profil/iconAstronaut.png", 2);
             tabPlayer[2] = j2;
-        }else{
-                //Humain vs IA ou Humain vs Humain
+        }
+        //Humain vs IA
+        else{
+                //Ajout d'une IA
                 IA ia=new IA("../imagesResources/profil/iconAlien.png",2,this);
                 tabPlayer[2]=ia;
         }
     }
-
+    //Fonction lançeant la fonction move d'une IA
+    //Lance la fonction move si le joueur est de type IA et qu'il est bien le joueur jouant actuellement
     public void game() throws IOException {
         if(currentPlayer==tabPlayer[1] && tabPlayer[1] instanceof IA){
             IA.Move move=tabPlayer[1].play();
@@ -105,6 +113,7 @@ public class Morpion extends GridPane {//TODO améliorer complexité
             this.rule=rule;
             setStyle("-fx-border-color: #303336");
             this.setPrefSize(300,300);
+            //On lance la fonction handleClick si on clique sur la Cell
             this.setOnMouseClicked(e-> {
                 try {
                     handleClick();
@@ -130,19 +139,27 @@ public class Morpion extends GridPane {//TODO améliorer complexité
             getChildren().add(imageView);
         }
 
+
+        //Fonction appliquant la prise de possesion de la case
+        //Le joueur actuel peut prend possession de la case si elle est vide
         private void handleClick() throws IOException {
+            //Si la case est vide
             if (player.getId()==0 && morpion.currentPlayer.getId()!=0){
+                //On applique le Joueur actuel sur la case
                 setPlayer(morpion.currentPlayer);
+                //On verifie si il y a une vicroire grace a ce mouvement
                 if(rule.victory(morpion.currentPlayer.getId())==morpion.currentPlayer.getId()){
                     Image imageWin=getImageWin(morpion.currentPlayer);
                     morpion.sceneController.goEndScene(morpion.window,imageWin);
                     morpion.currentPlayer=morpion.tabPlayer[0];
                 }
+                //On verifie si il ya une egalité
                 else if(rule.equalityBetweenBothPlayer()){
                     Image imageDraw=getDrawImage();
                     morpion.sceneController.goEndScene(morpion.window,imageDraw);
                     morpion.currentPlayer=morpion.tabPlayer[0];
                 }
+                //Sinon on change de joueur en fonction du joueur actuel
                 else{
                     switch (morpion.currentPlayer.getId()){
                         case 1:
@@ -154,6 +171,8 @@ public class Morpion extends GridPane {//TODO améliorer complexité
                             morpion.iconPlayer.setImage(morpion.tabPlayer[1].getImage());
                             break;
                     }
+                    //On lance la fonction game si l'option est activé
+                    //cette option permet d'éviter de lancer la fonction game quand on lance la fonction handleClick a partir de la fonction bestMove de l'IA
                     if(option){
                         morpion.game();
                     }
